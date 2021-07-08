@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import ClassComponent from './ClassComponent';
+import TodoList from './TodoList';
+import store from './store';
+import { observer } from 'mobx-react';
 
 function App() {
+
+    // const [count, setCount] = useState(0);
+
+    // const updateCount= () => {
+    //     setCount(c => c + 1);
+    // }
+
+    const { count, updateCount } = store;
+
+    const [title, setTitle ] = useState('');
+
+    const updateTitle = (e: any) => setTitle(e.target.value);
+    const addTodo = () => {
+        store.addTodo(title)
+    }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <div>Add todo:
+            <input value={title} 
+                onChange={updateTitle}
+            />
+
+            <button
+                onClick={addTodo}
+            >Add todo</button>
+        </div>
+        <div>
+            <b>Count: {count}</b>
+            <button onClick={() => updateCount()}>Update count</button>
+        </div>
+
+        <TodoList />
     </div>
   );
 }
 
-export default App;
+export default observer(App);
