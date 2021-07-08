@@ -6,6 +6,8 @@ import ClassComponent from './ClassComponent';
 import TodoList from './TodoList';
 import store from './store';
 import { observer } from 'mobx-react';
+import { Div } from './styles';
+
 
 function App() {
 
@@ -41,8 +43,10 @@ function App() {
         </div>
 
         <TodoList />
+        <Div>Hello styled component</Div>
     </div>
   );
 }
 
 export default observer(App);
+
